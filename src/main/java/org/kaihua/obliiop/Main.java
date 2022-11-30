@@ -1,6 +1,7 @@
 package org.kaihua.obliiop;
 
 import org.kaihua.obliiop.interfaces.ObliOp;
+import org.kaihua.obliiop.interfaces.RetObj;
 import org.kaihua.obliiop.interfaces.cmdtyp.Create;
 import org.kaihua.obliiop.interfaces.cmdtyp.Input;
 import org.kaihua.obliiop.interfaces.optyp.Sort;
@@ -16,8 +17,8 @@ public class Main {
     System.out.println("Hello world!");
     HashMap<String, String> info = new HashMap<>();
     info.put("key", "value");
-    ObliOp.ObliOpCommand(Input.produce());
+    RetObj retObj = ObliOp.ObliOpCommand(Input.produce());
     ObliOp.ObliOpCommand(Create.produce(Sort.produce(), info));
-//    System.out.println(retObj.typ.Create.info);
+    System.out.println(retObj.typ.Create.op.getClass());
   }
 }

@@ -2,7 +2,7 @@ package org.kaihua.obliiop.interfaces;
 
 import org.astonbitecode.j4rs.api.Instance;
 import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
-import org.kaihua.obliiop.interfaces.openum.CmdEnumBase;
+import org.kaihua.obliiop.interfaces.cmdenum.CmdEnumBase;
 
 /**
  * @author kahua.li (moflowerlkh@foxmail.com)
@@ -16,9 +16,11 @@ public class ObliOp {
   private static native Instance doObliOpCommand(Instance oblivCmdTyp);
 
   public static RetObj ObliOpCommand(CmdEnumBase obj) {
+    System.out.printf("%s", Java2RustUtils.createInstance(obj).getJson());
     return Java2RustUtils.getObjectCasted(
         doObliOpCommand(Java2RustUtils.createInstance(
             obj
         )));
+
   }
 }

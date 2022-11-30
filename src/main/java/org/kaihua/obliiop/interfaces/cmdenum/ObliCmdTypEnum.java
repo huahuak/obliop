@@ -1,7 +1,5 @@
 package org.kaihua.obliiop.interfaces.cmdenum;
 
-import java.util.HashMap;
-
 /**
  * @author kahua.li (moflowerlkh@foxmail.com)
  * @date 2022/11/30

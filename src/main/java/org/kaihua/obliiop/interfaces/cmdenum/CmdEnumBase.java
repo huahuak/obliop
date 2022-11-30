@@ -1,4 +1,4 @@
-package org.kaihua.obliiop.interfaces.openum;
+package org.kaihua.obliiop.interfaces.cmdenum;
 
 /**
  * @author kahua.li (moflowerlkh@foxmail.com)

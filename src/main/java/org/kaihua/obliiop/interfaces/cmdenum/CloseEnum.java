@@ -1,7 +1,6 @@
 package org.kaihua.obliiop.interfaces.cmdenum;
 
 import org.kaihua.obliiop.interfaces.cmdtyp.Close;
-import org.kaihua.obliiop.interfaces.openum.CmdEnumBase;
 
 /**
  * @author kahua.li (moflowerlkh@foxmail.com)

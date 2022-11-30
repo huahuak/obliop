@@ -10,6 +10,11 @@ import java.util.HashMap;
  **/
 public class Create extends CmdBase {
   public String name = "Create";
+  // TODO let rust enum mapping to java object precisely
+  /**
+   * now object is sortEnum/joinEnum/... when send to rust,
+   * and object is linkedHashMap when return from rust
+   */
   public Object op;
   public HashMap info;
 

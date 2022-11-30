@@ -6,6 +6,6 @@ import org.kaihua.obliiop.interfaces.optyp.Aggregate;
  * @author kahua.li (moflowerlkh@foxmail.com)
  * @date 2022/11/30
  **/
-public class AggregateEnum {
+public class AggregateEnum extends OpEnumBase{
   public Aggregate Aggregate;
 }
