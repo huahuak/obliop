@@ -1,10 +1,9 @@
 package org.kaihua.obliiop;
 
+import org.kaihua.obliiop.collection.ArrowVector;
 import org.kaihua.obliiop.interfaces.ObliOp;
 import org.kaihua.obliiop.interfaces.RetObj;
-import org.kaihua.obliiop.interfaces.cmdtyp.Create;
-import org.kaihua.obliiop.interfaces.cmdtyp.Input;
-import org.kaihua.obliiop.interfaces.optyp.Sort;
+import org.kaihua.obliiop.sort.Sorter;
 
 import java.util.HashMap;
 
@@ -15,10 +14,12 @@ import java.util.HashMap;
 public class Main {
   public static void main(String[] args) {
     System.out.println("Hello world!");
+    // ------------------------------------ //
     HashMap<String, String> info = new HashMap<>();
     info.put("key", "value");
-    RetObj retObj = ObliOp.ObliOpCommand(Input.produce());
-    ObliOp.ObliOpCommand(Create.produce(Sort.produce(), info));
-    System.out.println(retObj.typ.Create.op.getClass());
+    RetObj obliSort = ObliOp.ObliSort(new Sorter("ObliOp Java Main"));
+    System.out.println(obliSort.obli_op_id);
+    // ------------------------------------ //
+    ArrowVector.Init();
   }
 }
