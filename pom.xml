@@ -25,12 +25,5 @@
       <artifactId>j4rs</artifactId>
       <version>0.14.0</version>
     </dependency>
-    <!-- flatbuffers -->
-    <!-- https://mvnrepository.com/artifact/com.google.flatbuffers/flatbuffers-java -->
-    <dependency>
-        <groupId>com.google.flatbuffers</groupId>
-        <artifactId>flatbuffers-java</artifactId>
-        <version>22.11.23</version>
-    </dependency>
   </dependencies>
 </project>
