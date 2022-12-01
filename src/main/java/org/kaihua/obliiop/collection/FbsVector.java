@@ -44,9 +44,9 @@ public class FbsVector implements Vector {
     // ------------------ name ------------------ //
     int name = builder.createString("TEST");
     // ------------------ data ------------------ //
-    // int[] copyOfRange = Arrays.copyOfRange(data, 0, cur);
-    // int pairs = ObliVector.createPairsVector(builder, copyOfRange);
-    // cur = 0;
+    int[] copyOfRange = Arrays.copyOfRange(data, 0, cur);
+    int pairs = ObliVector.createPairsVector(builder, copyOfRange);
+    cur = 0;
     // ------------------------------------ //
     ObliVector.startObliVector(builder);
     ObliVector.addName(builder, name);
