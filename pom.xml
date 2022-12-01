@@ -25,25 +25,12 @@
       <artifactId>j4rs</artifactId>
       <version>0.14.0</version>
     </dependency>
-    <!-- Arrow -->
-    <!-- https://mvnrepository.com/artifact/org.apache.arrow/arrow-memory-netty -->
+    <!-- flatbuffers -->
+    <!-- https://mvnrepository.com/artifact/com.google.flatbuffers/flatbuffers-java -->
     <dependency>
-        <groupId>org.apache.arrow</groupId>
-        <artifactId>arrow-memory-netty</artifactId>
-        <version>10.0.1</version>
-        <scope>runtime</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.arrow/arrow-vector -->
-    <dependency>
-        <groupId>org.apache.arrow</groupId>
-        <artifactId>arrow-vector</artifactId>
-        <version>10.0.1</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
-    <dependency>
-        <groupId>io.netty</groupId>
-        <artifactId>netty-all</artifactId>
-        <version>4.1.85.Final</version>
+        <groupId>com.google.flatbuffers</groupId>
+        <artifactId>flatbuffers-java</artifactId>
+        <version>22.11.23</version>
     </dependency>
   </dependencies>
 </project>

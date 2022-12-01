@@ -2,6 +2,7 @@ package org.kaihua.obliiop.interfaces;
 
 import org.astonbitecode.j4rs.api.Instance;
 import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
+import org.kaihua.obliiop.data.ObliData;
 import org.kaihua.obliiop.sort.Sorter;
 
 /**
@@ -13,7 +14,7 @@ public class ObliOp {
     System.load("/Users/huahua/IdeaProjects/obliclient/target/debug/libobliclient.dylib");
   }
 
-  // ------------------------------------ //
+  // ------------------ obli sort ------------------ //
   private static native Instance doObliSort(Instance<Sorter> sorter);
 
   public static RetObj ObliSort(Sorter sorter) {
@@ -22,7 +23,7 @@ public class ObliOp {
             sorter)));
   }
 
-  // ------------------------------------ //
+  // ------------------ obli op close ------------------ //
   private static native Instance doObliOpClose(Instance<Integer> opId);
 
   public static RetObj ObliOpClsoe(int opId) {
@@ -31,6 +32,5 @@ public class ObliOp {
             opId)));
   }
 
-  // ------------------------------------ //
-  
+
 }
