@@ -10,7 +10,8 @@ import org.kaihua.obliop.sort.Sorter;
  **/
 public class ObliOp {
   static {
-    System.load("/Users/huahua/IdeaProjects/obliclient/target/debug/libobliclient.dylib");
+    // System.load("/Users/huahua/IdeaProjects/obliclient/target/debug/libobliclient.dylib");
+    System.load("/home/huahua/Projects/obliop/obliclient/target/debug/libobliclient.so");
   }
 
   // ------------------ obli sort ------------------ //

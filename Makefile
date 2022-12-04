@@ -1,5 +1,5 @@
 # // ------------------ java ------------------ //
-CLASSES = ./spark-3.3.1/obliop/target/classes
+CLASSES = ./target/classes
 
 EMPTY :=
 SPACE := $(EMPTY) $(EMPTY)
