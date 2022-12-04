@@ -2,6 +2,7 @@ package org.kaihua.obliop.interfaces;
 
 import org.astonbitecode.j4rs.api.Instance;
 import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
+import org.kaihua.obliop.data.ObliData;
 import org.kaihua.obliop.sort.Sorter;
 
 /**
@@ -33,11 +34,11 @@ public class ObliOp {
   }
 
   // ------------------ obli data send------------------ //
-  private static native Instance doObliDataSend(Instance<byte[]> byt);
+  private static native Instance doObliDataSend(Instance<ObliData> data);
 
-  public static RetObj ObliDataSend(byte[] byt) {
+  public static RetObj ObliDataSend(ObliData data) {
     return Java2RustUtils.getObjectCasted(
         doObliDataSend(Java2RustUtils.createInstance(
-            byt)));
+            data)));
   }
 }

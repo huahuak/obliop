@@ -17,8 +17,8 @@ COLOR=\033[0;33m
 NC=\033[0m # No Color
 
 all:
-	@mvn compile > /dev/null
-	@cargo build --manifest-path $(CARGO_TOML) > /dev/null
+	@mvn compile
+	@cargo build --manifest-path $(CARGO_TOML) 
 	@echo "${COLOR}\n// ------------------ BEGIN ------------------ //\n${NC}"
 	@java -cp $(DEPENDENCIDES_PATH):$(CLASSES) $(MAIN_CLASS)
 
