@@ -1,5 +1,5 @@
 # // ------------------ java ------------------ //
-CLASSES = /Users/huahua/IdeaProjects/spark-3.3.1/obliop/target/classes
+CLASSES = ./spark-3.3.1/obliop/target/classes
 
 EMPTY :=
 SPACE := $(EMPTY) $(EMPTY)
@@ -10,7 +10,7 @@ MAIN_CLASS = org.kaihua.obliop.Main
 
 # // ------------------ rust ------------------ //
 
-CARGO_TOML = /Users/huahua/IdeaProjects/obliclient/Cargo.toml
+CARGO_TOML = ./obliclient/Cargo.toml
 
 # // ------------------ shell ------------------ //
 COLOR=\033[0;33m
