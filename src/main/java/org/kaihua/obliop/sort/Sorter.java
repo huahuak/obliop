@@ -1,4 +1,4 @@
-package org.kaihua.obliiop.sort;
+package org.kaihua.obliop.sort;
 
 public class Sorter {
   public String caller_info;

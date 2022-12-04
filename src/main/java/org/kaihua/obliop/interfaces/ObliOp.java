@@ -1,9 +1,8 @@
-package org.kaihua.obliiop.interfaces;
+package org.kaihua.obliop.interfaces;
 
 import org.astonbitecode.j4rs.api.Instance;
 import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
-import org.kaihua.obliiop.data.ObliData;
-import org.kaihua.obliiop.sort.Sorter;
+import org.kaihua.obliop.sort.Sorter;
 
 /**
  * @author kahua.li (moflowerlkh@foxmail.com)
@@ -32,5 +31,12 @@ public class ObliOp {
             opId)));
   }
 
+  // ------------------ obli data send------------------ //
+  private static native Instance doObliDataSend(Instance<byte[]> byt);
 
+  public static RetObj ObliDataSend(byte[] byt) {
+    return Java2RustUtils.getObjectCasted(
+        doObliDataSend(Java2RustUtils.createInstance(
+            byt)));
+  }
 }

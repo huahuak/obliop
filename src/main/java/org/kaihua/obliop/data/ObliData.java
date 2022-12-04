@@ -1,13 +1,11 @@
-package org.kaihua.obliiop.data;
-
-import java.nio.ByteBuffer;
+package org.kaihua.obliop.data;
 
 public class ObliData {
   public String name = "DataManager";
   public int obli_op_id;
-  public ByteBuffer buf;
+  public byte[] buf;
 
-  public ObliData(int opId, ByteBuffer byt) {
+  public ObliData(int opId, byte[] byt) {
     this.obli_op_id = opId;
     this.buf = byt;
   }
