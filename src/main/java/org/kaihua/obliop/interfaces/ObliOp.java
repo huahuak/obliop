@@ -3,6 +3,7 @@ package org.kaihua.obliop.interfaces;
 import org.astonbitecode.j4rs.api.Instance;
 import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
 import org.kaihua.obliop.data.ObliData;
+import org.kaihua.obliop.data.RetObj;
 import org.kaihua.obliop.sort.Sorter;
 
 /**
@@ -10,11 +11,6 @@ import org.kaihua.obliop.sort.Sorter;
  * @date 2022/11/30
  **/
 public class ObliOp {
-  static {
-    // System.load("/Users/huahua/IdeaProjects/obliclient/target/debug/libobliclient.dylib");
-    System.load("/home/huahua/Projects/obliop/obliclient/target/debug/libobliclient.so");
-  }
-
   // ------------------ obli sort ------------------ //
   private static native Instance doObliSort(Instance<Sorter> sorter);
 

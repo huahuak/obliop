@@ -1,4 +1,4 @@
-package org.kaihua.obliop.interfaces;
+package org.kaihua.obliop.data;
 
 /**
  * @author kahua.li (moflowerlkh@foxmail.com)
