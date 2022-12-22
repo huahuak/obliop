@@ -19,15 +19,15 @@ NC=\033[0m # No Color
 
 # // ------------------ optee env ------------------ //
 OPTEE_RUST = /home/huahua/Projects/rust_optee/optee_rust
-OPTEE_CLIENT = ${OPTEE_RUST}/examples/hello_world-rs/host
+OPTEE_CLIENT = ${OPTEE_RUST}/examples/hello_world-rs/obliop/obliclient
 OUT_PATH = ${OPTEE_RUST}/out
 JAVA_OUT_PATH = ${OUT_PATH}/java
 RES_OUT_PATH = ${OUT_PATH}/res
 
 # // ------------------ optee ------------------ //
-# mkdir lkh && mount -t 9p -o trans=virtio host lkh && cd lkh
+# mkdir lkh && mount -t 9p -o trans=virtio host lkh && cd lkh && chmod +x ./optee.sh
 
-aarch:
+aarch:	dep
 	@mvn package
 	@source ${OPTEE_RUST}/environment
 	@make -C ${OPTEE_CLIENT} host
@@ -39,7 +39,7 @@ aarch:
 	@if [ ! -d "${JAVA_OUT_PATH}" ]; then\
 		mkdir ${JAVA_OUT_PATH};\
 	fi
-	@cp -f ${OPTEE_RUST}/examples/hello_world-rs/host/target/aarch64-unknown-linux-gnu/debug/libhello_world_rs.so ${JAVA_OUT_PATH}
+	@cp -f ${OPTEE_CLIENT}/target/aarch64-unknown-linux-gnu/debug/libobliclient.so ${JAVA_OUT_PATH}
 	@cp -f ./target/dependency/* ${JAVA_OUT_PATH}
 	@cp ./target/obliop-3.3.1.jar ${JAVA_OUT_PATH}
 
