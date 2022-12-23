@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "obliclient"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic",
+		"java.configuration.updateBuildConfiguration": "interactive",
+		"files.associations": {
+			"org_kaihua_obliop_interfaces_cjni_cjniutil.h": "c"
+		}
+	}
+}

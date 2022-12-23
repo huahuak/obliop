@@ -1,9 +1,8 @@
 package org.kaihua.obliop.interfaces;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 
-import org.kaihua.obliop.util.Util;
+import sun.nio.ch.DirectBuffer;
 
 public class ObliJni {
 
@@ -14,12 +13,13 @@ public class ObliJni {
 
   private static native String hello(String input);
 
-  private static native void doObliDataSend(byte[] buf, long ptr, int len);
+  private static native void doObliDataSend(ByteBuffer buf, long ptr, int len);
 
   public static void ObliDataSend(ByteBuffer buf, Object ptr, Object len) {
     doObliDataSend(
-        Arrays.copyOfRange(buf.array(), buf.position(), buf.capacity()),
-        (Long) ptr, (Integer) len);
+        // Arrays.copyOfRange(buf.array(), buf.position(), buf.capacity()),
+        buf,
+        ((DirectBuffer) buf).address(), (Integer) buf.capacity() - buf.position());
   }
 
   public static String doHello(String input) {

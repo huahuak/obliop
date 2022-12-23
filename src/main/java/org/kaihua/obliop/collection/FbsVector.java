@@ -7,14 +7,15 @@ import com.google.flatbuffers.FlatBufferBuilder;
 
 public class FbsVector {
   public static ByteBuffer test() {
-    FlatBufferBuilder builder = new FlatBufferBuilder(0);
+    ByteBuffer directBuf = ByteBuffer.allocateDirect(1024);
+    FlatBufferBuilder builder = new FlatBufferBuilder(directBuf);
     int intValueOffset = IntValue.createIntValue(builder, 1024);
     int fieldOffset = Field.createField(builder, FieldUnion.IntValue, intValueOffset, false);
     int fieldVecOffset = Row.createFieldsVector(builder, new int[] { fieldOffset });
     int rowOffset = Row.createRow(builder, fieldVecOffset);
     int rowVecOffset = Rows.createRowsVector(builder, new int[] { rowOffset });
     int rowsOffset = Rows.createRows(builder, rowVecOffset);
-    System.out.println(rowOffset);
+    builder.finish(rowsOffset);
     ByteBuffer buffer = builder.dataBuffer();
     return buffer;
     // Rows rowsObj = Rows.getRootAsRows(buffer);

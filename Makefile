@@ -20,6 +20,8 @@ NC=\033[0m # No Color
 # // ------------------ optee env ------------------ //
 OPTEE_RUST = /home/huahua/Projects/rust_optee/optee_rust
 OPTEE_CLIENT = ${OPTEE_RUST}/examples/hello_world-rs/obliop/obliclient
+OPTEE_SPARK = ${OPTEE_RUST}/examples/hello_world-rs/obliop
+OPTEE_CJNI = ${OPTEE_SPARK}/src/main/java/org/kaihua/obliop/interfaces/cjni
 OUT_PATH = ${OPTEE_RUST}/out
 JAVA_OUT_PATH = ${OUT_PATH}/java
 RES_OUT_PATH = ${OUT_PATH}/res
@@ -39,6 +41,8 @@ aarch:	dep
 	@if [ ! -d "${JAVA_OUT_PATH}" ]; then\
 		mkdir ${JAVA_OUT_PATH};\
 	fi
+	@make -C ${OPTEE_CJNI}
+	@cp ${OPTEE_CJNI}/libcjni.so ${JAVA_OUT_PATH}
 	@cp -f ${OPTEE_CLIENT}/target/aarch64-unknown-linux-gnu/debug/libobliclient.so ${JAVA_OUT_PATH}
 	@cp -f ./target/dependency/* ${JAVA_OUT_PATH}
 	@cp ./target/obliop-3.3.1.jar ${JAVA_OUT_PATH}
