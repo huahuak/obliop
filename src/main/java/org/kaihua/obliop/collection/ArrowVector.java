@@ -23,8 +23,8 @@ public class ArrowVector {
     intVector.setSafe(2, 3);
     intVector.setValueCount(3);
     System.out.println("[Java] FieldVector: \n" + intVector);
-    Data.exportVector(allocator, intVector, null, ArrowArray.wrap(arrayAddr), ArrowSchema.wrap(schemaAddr));
-    ObliOp.ObliDataSend(new ObliData(0, arrayAddr, schemaAddr));
+    // Data.exportVector(allocator, intVector, null, ArrowArray.wrap(arrayAddr), ArrowSchema.wrap(schemaAddr));
+    // ObliOp.ObliDataSend(new ObliData(0, arrayAddr, schemaAddr));
     allocator.close();
     arrowSchema.close();
     arrowArray.close();

@@ -139,6 +139,12 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>com.google.flatbuffers</groupId>
+      <artifactId>flatbuffers-java</artifactId>
+      <version>22.12.06</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_2.12</artifactId>
       <version>3.3.0-SNAP3</version>

@@ -51,5 +51,13 @@
         <artifactId>netty-all</artifactId>
         <version>4.1.85.Final</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.flatbuffers/flatbuffers-java -->
+    <!-- Flatbuffers -->
+    <dependency>
+        <groupId>com.google.flatbuffers</groupId>
+        <artifactId>flatbuffers-java</artifactId>
+        <version>22.12.06</version>
+    </dependency>
+
   </dependencies>
 </project>
