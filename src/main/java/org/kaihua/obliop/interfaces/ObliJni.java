@@ -15,7 +15,7 @@ public class ObliJni {
 
 	private static native void doObliDataSend(ByteBuffer buf, long ptr, int len);
 
-	public static void ObliDataSend(ByteBuffer buf, Object ptr, Object len) {
+	public static void ObliDataSend(ByteBuffer buf) {
 		doObliDataSend(buf, ((DirectBuffer) buf).address(), (Integer) buf.capacity() - buf.position());
 	}
 
