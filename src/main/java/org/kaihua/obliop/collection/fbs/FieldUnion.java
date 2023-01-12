@@ -8,8 +8,9 @@ public final class FieldUnion {
   public static final byte NONE = 0;
   public static final byte IntValue = 1;
   public static final byte DoubleValue = 2;
+  public static final byte StringValue = 3;
 
-  public static final String[] names = { "NONE", "IntValue", "DoubleValue", };
+  public static final String[] names = { "NONE", "IntValue", "DoubleValue", "StringValue", };
 
   public static String name(int e) { return names[e]; }
 }

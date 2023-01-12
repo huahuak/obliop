@@ -43,6 +43,6 @@ public class Main {
     }
     System.out.println("ptr is " + (Long) ptr + ", and cap is " + (Integer) cap);
     System.out.println("position is " + buf.position());
-    ObliJni.ObliDataSend((ByteBuffer) buf, ptr, buf.position());
+    ObliJni.ObliDataSend((ByteBuffer) buf);
   }
 }
