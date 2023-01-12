@@ -6,23 +6,20 @@ import sun.nio.ch.DirectBuffer;
 
 public class ObliJni {
 
-  static {
-    // System.load("/home/huahua/Projects/obliop/obliclient/target/debug/libobliclient.so");
-    System.load("/root/lkh/java/libobliclient.so");
-  }
+	static {
+		// System.load("/home/huahua/Projects/obliop/obliclient/target/debug/libobliclient.so");
+		System.load("/root/lkh/java/libobliclient.so");
+	}
 
-  private static native String hello(String input);
+	private static native String hello(String input);
 
-  private static native void doObliDataSend(ByteBuffer buf, long ptr, int len);
+	private static native void doObliDataSend(ByteBuffer buf, long ptr, int len);
 
-  public static void ObliDataSend(ByteBuffer buf, Object ptr, Object len) {
-    doObliDataSend(
-        // Arrays.copyOfRange(buf.array(), buf.position(), buf.capacity()),
-        buf,
-        ((DirectBuffer) buf).address(), (Integer) buf.capacity() - buf.position());
-  }
+	public static void ObliDataSend(ByteBuffer buf, Object ptr, Object len) {
+		doObliDataSend(buf, ((DirectBuffer) buf).address(), (Integer) buf.capacity() - buf.position());
+	}
 
-  public static String doHello(String input) {
-    return hello(input);
-  }
+	public static String doHello(String input) {
+		return hello(input);
+	}
 }
