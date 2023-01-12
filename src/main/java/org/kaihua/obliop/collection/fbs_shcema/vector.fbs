@@ -8,8 +8,12 @@ table DoubleValue {
   value:double;
 }
 
+table StringValue {
+  value:string;
+}
+
 union FieldUnion {
-  IntValue, DoubleValue
+  IntValue, DoubleValue, StringValue
 }
 
 table Field {
@@ -21,6 +25,6 @@ table Row {
   fields:[Field];
 }
 
-table Rows {
+table Vec {
   rows:[Row];
 }
