@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.flatbuffers.Table;
 import org.kaihua.obliop.collection.fbs.*;
 import com.google.flatbuffers.FlatBufferBuilder;
 
@@ -21,8 +22,8 @@ public class FbsVector {
 
   FbsVector(int cap) {
     offset = 0;
-    fieldOffset = new ArrayList<>(1);
-    rowOffset = new ArrayList<>(1);
+    fieldOffset = new ArrayList<>(0);
+    rowOffset = new ArrayList<>(0);
     directBuffer = ByteBuffer.allocateDirect(cap);
     builder = new FlatBufferBuilder(directBuffer);
   }
@@ -30,20 +31,21 @@ public class FbsVector {
   public static ByteBuffer test() {
     ByteBuffer directBuf = ByteBuffer.allocateDirect(1024);
     FlatBufferBuilder builder = new FlatBufferBuilder(directBuf);
-    int intValueOffset = IntValue.createIntValue(builder, 1024);
-    int fieldOffset = Field.createField(builder, FieldUnion.IntValue, intValueOffset, false);
+    int strOffset = builder.createString("hello world! here is java test");
+    int strValueOffset = StringValue.createStringValue(builder, strOffset);
+    int fieldOffset = Field.createField(builder, FieldUnion.StringValue, strValueOffset, false);
     int fieldVecOffset = Row.createFieldsVector(builder, new int[]{fieldOffset});
     int rowOffset = Row.createRow(builder, fieldVecOffset);
     int rowVecOffset = Vec.createRowsVector(builder, new int[]{rowOffset});
     int rowsOffset = Vec.createVec(builder, rowVecOffset);
     builder.finish(rowsOffset);
     ByteBuffer buffer = builder.dataBuffer();
+    Vec rowsObj = Vec.getRootAsVec(buffer);
+    Row rowObj = rowsObj.rows(0);
+    Field fieldObj = rowObj.fields(0);
+    StringValue valueObj = (StringValue) fieldObj.value(new StringValue());
+    System.out.println("[FbsVector.java] value is " + valueObj.value());
     return buffer;
-    // Rows rowsObj = Rows.getRootAsRows(buffer);
-    // Row rowObj = rowsObj.rows(0);
-    // Field fieldObj = rowObj.fields(0);
-    // IntValue valueObj = (IntValue) fieldObj.value(new IntValue());
-    // System.out.println("value is " + valueObj.value());
   }
 
 
@@ -53,14 +55,14 @@ public class FbsVector {
 
   public static class Cell {
     Object value;
-    Class clz;
+    String clz;
 
     public boolean isNull() {
       return value == null;
     }
   }
 
-  public static Cell createCell(Object value, Class clz) {
+  public static Cell createCell(Object value, String clz) {
     Cell cell = new Cell();
     cell.value = value;
     cell.clz = clz;
@@ -70,13 +72,13 @@ public class FbsVector {
 
   public void append(List<Cell> record) {
     record.forEach(r -> {
-      if (r.clz == String.class) {
+      if (r.clz.equals("StringType")) {
         offset = builder.createString((String) r.value);
         offset = StringValue.createStringValue(builder, offset);
-        Field.createField(builder, FieldUnion.StringValue, offset, r.isNull());
+        offset = Field.createField(builder, FieldUnion.StringValue, offset, r.isNull());
         fieldOffset.add(offset);
       }
-      if (r.clz == Integer.class) {
+      if (r.clz.equals("IntegerType")) {
         offset = IntValue.createIntValue(builder, (Integer) r.value);
         offset = Field.createField(builder, FieldUnion.IntValue, offset, r.isNull());
         fieldOffset.add(offset);
@@ -99,6 +101,8 @@ public class FbsVector {
     offset = Vec.createRowsVector(builder, arr);
     offset = Vec.createVec(builder, offset);
     builder.finish(offset);
+    Vec vec = Vec.getRootAsVec(builder.dataBuffer());
+    StringValue value = (StringValue)vec.rows(0).fields(0).value(new StringValue());
     return builder.dataBuffer();
   }
 }
