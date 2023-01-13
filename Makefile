@@ -32,6 +32,10 @@ RES_OUT_PATH = ${OUT_PATH}/res
 # mkdir lkh && mount -t 9p -o trans=virtio host lkh && cd lkh && chmod +x ./optee.sh && chmod +x ./spark/run.sh 
 # cp -f ./ta/133af0ca-bdab-11eb-9130-43bf7873bf67.ta /lib/optee_armtz/
 
+help:
+	@echo "mkdir lkh && mount -t 9p -o trans=virtio host lkh && cd lkh && chmod +x ./optee.sh && chmod +x ./spark/run.sh "
+	@echo "cp -f ./ta/133af0ca-bdab-11eb-9130-43bf7873bf67.ta /lib/optee_armtz/"
+
 aarch: mkdir dep ta client java
 # c-JNI make
 	@make -C ${OPTEE_CJNI}
