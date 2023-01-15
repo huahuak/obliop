@@ -41,8 +41,6 @@ public class Main {
     } catch (IllegalArgumentException | IllegalAccessException e) {
       e.printStackTrace();
     }
-    System.out.println("ptr is " + (Long) ptr + ", and cap is " + (Integer) cap);
-    System.out.println("position is " + buf.position());
     ObliJni.ObliDataSend((ByteBuffer) buf);
   }
 }

@@ -1,11 +1,12 @@
 package org.kaihua.obliop.collection;
 
-import com.google.flatbuffers.FlatBufferBuilder;
-import org.kaihua.obliop.collection.fbs.*;
-
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.flatbuffers.Table;
+import org.kaihua.obliop.collection.fbs.*;
+import com.google.flatbuffers.FlatBufferBuilder;
 
 /**
  * @author kahua.li
@@ -30,14 +31,20 @@ public class FbsVector {
   public static ByteBuffer test() {
     ByteBuffer directBuf = ByteBuffer.allocateDirect(1024);
     FlatBufferBuilder builder = new FlatBufferBuilder(directBuf);
-    int intValueOffset = IntValue.createIntValue(builder, 1024);
-    int fieldOffset = Field.createField(builder, FieldUnion.IntValue, intValueOffset, false);
+    int strOffset = builder.createString("hello world! here is java test");
+    int strValueOffset = StringValue.createStringValue(builder, strOffset);
+    int fieldOffset = Field.createField(builder, FieldUnion.StringValue, strValueOffset, false);
     int fieldVecOffset = Row.createFieldsVector(builder, new int[]{fieldOffset});
     int rowOffset = Row.createRow(builder, fieldVecOffset);
-    int rowVecOffset = Vec.createRowsVector(builder, new int[]{rowOffset});
-    int rowsOffset = Vec.createVec(builder, rowVecOffset);
+    int rowVecOffset = RowTable.createRowsVector(builder, new int[]{rowOffset});
+    int rowsOffset = RowTable.createRowTable(builder, rowVecOffset);
     builder.finish(rowsOffset);
     ByteBuffer buffer = builder.dataBuffer();
+    RowTable rowsObj = RowTable.getRootAsRowTable(buffer);
+    Row rowObj = rowsObj.rows(0);
+    Field fieldObj = rowObj.fields(0);
+    StringValue valueObj = (StringValue) fieldObj.value(new StringValue());
+    System.out.println("[FbsVector.java] value is " + valueObj.value());
     return buffer;
   }
 
@@ -91,11 +98,9 @@ public class FbsVector {
     for (int i = 0; i < arr.length; i++) {
       arr[i] = rowOffset.get(i);
     }
-    offset = Vec.createRowsVector(builder, arr);
-    offset = Vec.createVec(builder, offset);
+    offset = RowTable.createRowsVector(builder, arr);
+    offset = RowTable.createRowTable(builder, offset);
     builder.finish(offset);
-    Vec vec = Vec.getRootAsVec(builder.dataBuffer());
-    StringValue value = (StringValue) vec.rows(0).fields(0).value(new StringValue());
     return builder.dataBuffer();
   }
 }
