@@ -7,7 +7,6 @@ import sun.nio.ch.DirectBuffer;
 public class ObliJni {
 
 	static {
-		// System.load("/home/huahua/Projects/obliop/obliclient/target/debug/libobliclient.so");
 		System.load("/root/lkh/java/libobliclient.so");
 	}
 

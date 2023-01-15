@@ -12,7 +12,6 @@ import org.kaihua.obliop.sort.Sorter;
  **/
 public class ObliOp {
   static {
-    // System.load("/home/huahua/Projects/obliop/obliclient/target/debug/libobliclient.so");
     System.load("/root/lkh/java/libobliclient.so");
   }
 
