@@ -25,6 +25,6 @@ table Row {
   fields:[Field];
 }
 
-table Vec {
+table RowTable {
   rows:[Row];
 }

@@ -8,16 +8,17 @@
       "type": "gdb",
       "request": "attach",
       "name": "Attach to QEMU",
-      "executable": "/home/huahua/Projects/rust_optee/optee_os/out/arm/core/tee.elf",
+      "executable": "/home/huahua/Projects/optee/optee_os/out/arm/core/tee.elf",
       "target": "localhost:1234",
       "remote": true,
       "cwd": "${workspaceRoot}",
-      "gdbpath": "/home/huahua/Projects/rust_optee/toolchains/aarch64/bin/aarch64-linux-gnu-gdb",
+      "gdbpath": "/home/huahua/Projects/optee/toolchains/aarch64/bin/aarch64-linux-gnu-gdb",
       "autorun": [
         "set print array on",
         "set print pretty on",
         "handle SIGTRAP noprint nostop pass",
-        "symbol-file /home/huahua/Projects/rust_optee/optee_os/out/arm/core/tee.elf"
+        "symbol-file /home/huahua/Projects/optee/optee_os/out/arm/core/tee.elf",
+        // "b thread_enter_user_mode"
       ]
     }
   ]
