@@ -4,7 +4,12 @@ import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 import org.kaihua.obliop.collection.FbsVector;
+import org.kaihua.obliop.data.ObliData;
 import org.kaihua.obliop.interfaces.ObliJni;
+import org.kaihua.obliop.interfaces.ObliOp;
+import org.kaihua.obliop.operator.Sorter;
+
+import sun.nio.ch.DirectBuffer;
 
 /**
  * @author kahua.li
@@ -42,5 +47,8 @@ public class Main {
       e.printStackTrace();
     }
     ObliJni.ObliDataSend((ByteBuffer) buf);
+    ObliOp.ObliDataSend(new ObliData(
+        ((DirectBuffer) buf).address() + buf.position(),
+        buf.capacity() - buf.position()));
   }
 }

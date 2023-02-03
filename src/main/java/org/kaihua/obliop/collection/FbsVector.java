@@ -4,8 +4,13 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.flatbuffers.Table;
-import org.kaihua.obliop.collection.fbs.*;
+import org.kaihua.obliop.collection.fbs.Field;
+import org.kaihua.obliop.collection.fbs.FieldUnion;
+import org.kaihua.obliop.collection.fbs.IntValue;
+import org.kaihua.obliop.collection.fbs.Row;
+import org.kaihua.obliop.collection.fbs.RowTable;
+import org.kaihua.obliop.collection.fbs.StringValue;
+
 import com.google.flatbuffers.FlatBufferBuilder;
 
 /**

@@ -1,14 +1,36 @@
 package org.kaihua.obliop.data;
 
-public class ObliData {
-  public String name = "DataManager";
-  public int obli_op_id;
-  public long array_addr;
-  public long shcema_addr;
+import java.util.UUID;
 
-  public ObliData(int opId, long array_addr, long shcema_addr) {
-    this.obli_op_id = opId;
-    this.array_addr = array_addr;
-    this.shcema_addr = shcema_addr;
+public class ObliData {
+  // @add pulbic for serialization
+  public String name = "NOT DEFINE";
+  // @todo id can't be random for tolerance
+  public String id = UUID.randomUUID().toString();
+  public long addr;
+  public long length;
+
+  public boolean prepared;
+  public int in_use;
+
+  private ObliData() {
+    this.prepared = false;
+    this.in_use = 0;
+  };
+
+  public ObliData(long addr, long length) {
+    this();
+    this.addr = addr;
+    this.length = length;
+    this.prepared = true;
+  }
+
+  public static ObliData empty() {
+    return new ObliData();
+  }
+
+  public ObliData setName(String name) {
+    this.name = name;
+    return this;
   }
 }
