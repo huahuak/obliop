@@ -5,6 +5,7 @@ import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
 import org.kaihua.obliop.data.ObliData;
 import org.kaihua.obliop.data.RetObj;
 import org.kaihua.obliop.operator.Sorter;
+import org.kaihua.obliop.operator.context.Context;
 
 /**
  * @author kahua.li (moflowerlkh@foxmail.com)
@@ -17,13 +18,14 @@ public class ObliOp {
     System.load("/root/lkh/java/libobliclient.so");
   }
 
-  // ------------------ obli sort ------------------ //
-  private static native Instance doObliSort(Instance<Sorter> sorter);
+  // ------------------ obli op ------------------ //
+  private static native Instance doObliOpCtxExec(Instance<Context> ctx);
 
-  public static RetObj ObliSort(Sorter sorter) {
+  public static RetObj ObliOpCtxExec(Context ctx) {
     return Java2RustUtils.getObjectCasted(
-        doObliSort(Java2RustUtils.createInstance(sorter)));
+        doObliOpCtxExec(Java2RustUtils.createInstance(ctx)));
   }
+
 
   // ------------------ obli op close ------------------ //
   private static native Instance doObliOpClose(Instance<Integer> opId);
