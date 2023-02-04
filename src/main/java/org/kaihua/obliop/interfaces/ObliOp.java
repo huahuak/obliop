@@ -4,7 +4,6 @@ import org.astonbitecode.j4rs.api.Instance;
 import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
 import org.kaihua.obliop.data.ObliData;
 import org.kaihua.obliop.data.RetObj;
-import org.kaihua.obliop.operator.Sorter;
 import org.kaihua.obliop.operator.context.Context;
 
 /**
@@ -18,7 +17,7 @@ public class ObliOp {
     System.load("/root/lkh/java/libobliclient.so");
   }
 
-  // ------------------ obli op ------------------ //
+  // ------------------ obli op exec ------------------ //
   private static native Instance doObliOpCtxExec(Instance<Context> ctx);
 
   public static RetObj ObliOpCtxExec(Context ctx) {
