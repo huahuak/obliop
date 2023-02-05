@@ -4,7 +4,7 @@ import org.astonbitecode.j4rs.api.Instance;
 import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
 import org.kaihua.obliop.data.ObliData;
 import org.kaihua.obliop.data.RetObj;
-import org.kaihua.obliop.sort.Sorter;
+import org.kaihua.obliop.operator.context.Context;
 
 /**
  * @author kahua.li (moflowerlkh@foxmail.com)
@@ -16,22 +16,21 @@ public class ObliOp {
     System.load("/root/lkh/java/libobliclient.so");
   }
 
-  // ------------------ obli sort ------------------ //
-  private static native Instance doObliSort(Instance<Sorter> sorter);
+  // ------------------ obli op exec ------------------ //
+  private static native Instance doObliOpCtxExec(Instance<Context> ctx);
 
-  public static RetObj ObliSort(Sorter sorter) {
+  public static RetObj ObliOpCtxExec(Context ctx) {
     return Java2RustUtils.getObjectCasted(
-        doObliSort(Java2RustUtils.createInstance(
-            sorter)));
+        doObliOpCtxExec(Java2RustUtils.createInstance(ctx)));
   }
+
 
   // ------------------ obli op close ------------------ //
   private static native Instance doObliOpClose(Instance<Integer> opId);
 
   public static RetObj ObliOpClsoe(int opId) {
     return Java2RustUtils.getObjectCasted(
-        doObliOpClose(Java2RustUtils.createInstance(
-            opId)));
+        doObliOpClose(Java2RustUtils.createInstance(opId)));
   }
 
   // ------------------ obli data send------------------ //
@@ -39,7 +38,6 @@ public class ObliOp {
 
   public static RetObj ObliDataSend(ObliData data) {
     return Java2RustUtils.getObjectCasted(
-        doObliDataSend(Java2RustUtils.createInstance(
-            data)));
+        doObliDataSend(Java2RustUtils.createInstance(data)));
   }
 }
