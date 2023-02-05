@@ -10,8 +10,11 @@ import org.kaihua.obliop.collection.fbs.IntValue;
 import org.kaihua.obliop.collection.fbs.Row;
 import org.kaihua.obliop.collection.fbs.RowTable;
 import org.kaihua.obliop.collection.fbs.StringValue;
+import org.kaihua.obliop.data.ObliData;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+
+import sun.nio.ch.DirectBuffer;
 
 /**
  * @author kahua.li
@@ -39,9 +42,9 @@ public class FbsVector {
     int strOffset = builder.createString("hello world! here is java test");
     int strValueOffset = StringValue.createStringValue(builder, strOffset);
     int fieldOffset = Field.createField(builder, FieldUnion.StringValue, strValueOffset, false);
-    int fieldVecOffset = Row.createFieldsVector(builder, new int[]{fieldOffset});
+    int fieldVecOffset = Row.createFieldsVector(builder, new int[] { fieldOffset });
     int rowOffset = Row.createRow(builder, fieldVecOffset);
-    int rowVecOffset = RowTable.createRowsVector(builder, new int[]{rowOffset});
+    int rowVecOffset = RowTable.createRowsVector(builder, new int[] { rowOffset });
     int rowsOffset = RowTable.createRowTable(builder, rowVecOffset);
     builder.finish(rowsOffset);
     ByteBuffer buffer = builder.dataBuffer();
@@ -52,7 +55,6 @@ public class FbsVector {
     System.out.println("[FbsVector.java] value is " + valueObj.value());
     return buffer;
   }
-
 
   public static FbsVector createVec() {
     return new FbsVector(1024);
@@ -73,7 +75,6 @@ public class FbsVector {
     cell.clz = clz;
     return cell;
   }
-
 
   public void append(List<Cell> record) {
     record.forEach(r -> {
@@ -107,5 +108,11 @@ public class FbsVector {
     offset = RowTable.createRowTable(builder, offset);
     builder.finish(offset);
     return builder.dataBuffer();
+  }
+
+  public static ObliData toObliData(ByteBuffer buf) {
+    return new ObliData(
+        ((DirectBuffer) buf).address() + buf.position(),
+        buf.capacity() - buf.position());
   }
 }
