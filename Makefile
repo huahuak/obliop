@@ -27,7 +27,7 @@ java: mkdir
 # copy java module interface dependency jars
 	@echo "${COLOR}\n// ------------------ BEGIN JAVA ------------------ //\n${NC}"
 	@mvn package
-	@cp ./target/obliop-1.0.jar ${JAVA_OUT_PATH}
+	@cp ./target/obliop-1.0-jar-with-dependencies.jar ${JAVA_OUT_PATH}
 # copy start shell script
 	@cp -f ${OPTEE_SPARK}/optee.sh ${OUT_PATH}
 # c-JNI make
