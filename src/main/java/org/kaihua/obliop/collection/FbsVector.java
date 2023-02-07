@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.arrow.vector.types.pojo.FieldType;
 import org.kaihua.obliop.collection.fbs.DoubleValue;
 import org.kaihua.obliop.collection.fbs.Field;
 import org.kaihua.obliop.collection.fbs.FieldUnion;
@@ -15,7 +14,6 @@ import org.kaihua.obliop.collection.fbs.StringValue;
 import org.kaihua.obliop.data.ObliData;
 
 import com.google.flatbuffers.FlatBufferBuilder;
-import com.google.flatbuffers.Table;
 
 import sun.nio.ch.DirectBuffer;
 
@@ -116,6 +114,7 @@ public class FbsVector {
   }
 
   public static void printFbs(ByteBuffer buffer) {
+    System.out.println("[FbsVector.java] printFbs()");
     RowTable rowsObj = RowTable.getRootAsRowTable(buffer);
     for (int i = 0; i < rowsObj.rowsLength(); i++) {
       Row rowObj = rowsObj.rows(i);
@@ -124,17 +123,17 @@ public class FbsVector {
         switch (fieldObj.valueType()) {
           case FieldUnion.IntValue: {
             IntValue valueObj = (IntValue) fieldObj.value(new IntValue());
-            System.out.print("[FbsVector.java] value is " + valueObj.value() + " | ");
+            System.out.print(valueObj.value() + " | ");
           }
             break;
           case FieldUnion.DoubleValue: {
             DoubleValue valueObj = (DoubleValue) fieldObj.value(new DoubleValue());
-            System.out.print("[FbsVector.java] value is " + valueObj.value() + " | ");
+            System.out.print(valueObj.value() + " | ");
           }
             break;
           case FieldUnion.StringValue: {
             StringValue valueObj = (StringValue) fieldObj.value(new StringValue());
-            System.out.print("[FbsVector.java] value is " + valueObj.value() + " | ");
+            System.out.print(valueObj.value() + " | ");
           }
             break;
           default:
