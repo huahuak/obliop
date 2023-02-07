@@ -33,4 +33,8 @@ public class ObliData {
     this.name = name;
     return this;
   }
+
+  public void releaseDirectMemory() {
+    
+  }
 }
