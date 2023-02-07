@@ -1,15 +1,17 @@
 package org.kaihua.obliop;
 
+import static org.kaihua.obliop.util.Util.printByte;
+
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 import org.kaihua.obliop.collection.FbsVector;
 import org.kaihua.obliop.data.ObliData;
-import org.kaihua.obliop.interfaces.ObliJni;
 import org.kaihua.obliop.interfaces.ObliOp;
 import org.kaihua.obliop.operator.Operation;
 import org.kaihua.obliop.operator.context.Context;
 
+import io.netty.buffer.ByteBuf;
 import sun.nio.ch.DirectBuffer;
 
 /**
@@ -51,10 +53,13 @@ public class Main {
         ((DirectBuffer) buf).address() + buf.position(),
         buf.capacity() - buf.position());
     ObliOp.ObliDataSend(testData);
-    ObliJni.ObliDataSend((ByteBuffer) buf);
     Context ctx = Context.empty();
-    Operation.mod(ctx, Operation.hash(ctx, testData));
-    // Operation.mod(ctx, )
+    ObliData result = Operation.hash(ctx, testData);
     ObliOp.ObliOpCtxExec(ctx);
+    ByteBuffer bytBuf = ObliOp.ObliDataGet(result);
+    // byte[] byt = new byte[1024];
+    // bytBuf.get(byt);
+    // printByte(byt);
+    FbsVector.printFbs(bytBuf);
   }
 }

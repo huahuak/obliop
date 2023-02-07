@@ -1,7 +1,10 @@
 package org.kaihua.obliop.interfaces;
 
+import java.nio.ByteBuffer;
+
 import org.astonbitecode.j4rs.api.Instance;
 import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
+import org.kaihua.obliop.data.JniDataReceiver;
 import org.kaihua.obliop.data.ObliData;
 import org.kaihua.obliop.data.RetObj;
 import org.kaihua.obliop.operator.context.Context;
@@ -25,7 +28,6 @@ public class ObliOp {
         doObliOpCtxExec(Java2RustUtils.createInstance(ctx)));
   }
 
-
   // ------------------ obli op close ------------------ //
   private static native Instance doObliOpClose(Instance<Integer> opId);
 
@@ -40,5 +42,12 @@ public class ObliOp {
   public static RetObj ObliDataSend(ObliData data) {
     return Java2RustUtils.getObjectCasted(
         doObliDataSend(Java2RustUtils.createInstance(data)));
+  }
+
+  // ------------------ obli data get ------------------ //
+  public static ByteBuffer ObliDataGet(ObliData obliData) {
+    JniDataReceiver jniDataReciver = new JniDataReceiver();
+    ObliJni.doObliDataGet(obliData.id, jniDataReciver);
+    return jniDataReciver.get().get();
   }
 }
