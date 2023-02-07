@@ -21,6 +21,7 @@ import sun.nio.ch.DirectBuffer;
  **/
 public class Main {
   public static void main(String[] args) {
+    System.out.println("\u001B[32m// ------------------ enter main() ------------------ //\u001B[0m");
     // System.out.println("Hello world!");
     // ObliJni.doHello("hello java here");
     // // ------------------------------------ //
