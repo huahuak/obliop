@@ -57,7 +57,7 @@ public class Main {
     Context ctx = Context.empty();
     ObliData result = Operation.hash(ctx, testData);
     ObliOp.ObliOpCtxExec(ctx);
-    ByteBuffer bytBuf = ObliOp.ObliDataGet(result);
+    ByteBuffer bytBuf = ObliOp.ObliDataGet(result).get();
     // byte[] byt = new byte[1024];
     // bytBuf.get(byt);
     // printByte(byt);

@@ -116,6 +116,7 @@ public class FbsVector {
   }
 
   public static void printFbs(ByteBuffer buffer) {
+    System.out.println("[FbsVector.java] printFbs()");
     RowTable rowsObj = RowTable.getRootAsRowTable(buffer);
     for (int i = 0; i < rowsObj.rowsLength(); i++) {
       Row rowObj = rowsObj.rows(i);
@@ -124,17 +125,17 @@ public class FbsVector {
         switch (fieldObj.valueType()) {
           case FieldUnion.IntValue: {
             IntValue valueObj = (IntValue) fieldObj.value(new IntValue());
-            System.out.print("[FbsVector.java] value is " + valueObj.value() + " | ");
+            System.out.print(valueObj.value() + " | ");
           }
           break;
           case FieldUnion.DoubleValue: {
             DoubleValue valueObj = (DoubleValue) fieldObj.value(new DoubleValue());
-            System.out.print("[FbsVector.java] value is " + valueObj.value() + " | ");
+            System.out.print(valueObj.value() + " | ");
           }
           break;
           case FieldUnion.StringValue: {
             StringValue valueObj = (StringValue) fieldObj.value(new StringValue());
-            System.out.print("[FbsVector.java] value is " + valueObj.value() + " | ");
+            System.out.print(valueObj.value() + " | ");
           }
           break;
           default:
