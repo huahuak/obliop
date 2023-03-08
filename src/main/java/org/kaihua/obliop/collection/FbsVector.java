@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.arrow.vector.types.pojo.FieldType;
 import org.kaihua.obliop.collection.fbs.DoubleValue;
 import org.kaihua.obliop.collection.fbs.Field;
 import org.kaihua.obliop.collection.fbs.FieldUnion;
@@ -15,7 +14,6 @@ import org.kaihua.obliop.collection.fbs.StringValue;
 import org.kaihua.obliop.data.ObliData;
 
 import com.google.flatbuffers.FlatBufferBuilder;
-import com.google.flatbuffers.Table;
 
 import sun.nio.ch.DirectBuffer;
 
@@ -45,9 +43,9 @@ public class FbsVector {
     int strOffset = builder.createString("hello world! here is java test");
     int strValueOffset = StringValue.createStringValue(builder, strOffset);
     int fieldOffset = Field.createField(builder, FieldUnion.StringValue, strValueOffset, false);
-    int fieldVecOffset = Row.createFieldsVector(builder, new int[] { fieldOffset });
+    int fieldVecOffset = Row.createFieldsVector(builder, new int[]{fieldOffset});
     int rowOffset = Row.createRow(builder, fieldVecOffset);
-    int rowVecOffset = RowTable.createRowsVector(builder, new int[] { rowOffset });
+    int rowVecOffset = RowTable.createRowsVector(builder, new int[]{rowOffset});
     int rowsOffset = RowTable.createRowTable(builder, rowVecOffset);
     builder.finish(rowsOffset);
     ByteBuffer buffer = builder.dataBuffer();
@@ -98,7 +96,7 @@ public class FbsVector {
     rowOffset.add(offset);
   }
 
-  public ByteBuffer finish() {
+  public ByteBuffer finishAndClear() {
     int[] arr = new int[rowOffset.size()];
     for (int i = 0; i < arr.length; i++) {
       arr[i] = rowOffset.get(i);
@@ -106,7 +104,9 @@ public class FbsVector {
     offset = RowTable.createRowsVector(builder, arr);
     offset = RowTable.createRowTable(builder, offset);
     builder.finish(offset);
-    return builder.dataBuffer();
+    ByteBuffer bytbuf = builder.dataBuffer();
+    builder.clear();
+    return bytbuf;
   }
 
   public static ObliData toObliData(ByteBuffer buf) {
@@ -126,17 +126,17 @@ public class FbsVector {
             IntValue valueObj = (IntValue) fieldObj.value(new IntValue());
             System.out.print("[FbsVector.java] value is " + valueObj.value() + " | ");
           }
-            break;
+          break;
           case FieldUnion.DoubleValue: {
             DoubleValue valueObj = (DoubleValue) fieldObj.value(new DoubleValue());
             System.out.print("[FbsVector.java] value is " + valueObj.value() + " | ");
           }
-            break;
+          break;
           case FieldUnion.StringValue: {
             StringValue valueObj = (StringValue) fieldObj.value(new StringValue());
             System.out.print("[FbsVector.java] value is " + valueObj.value() + " | ");
           }
-            break;
+          break;
           default:
             break;
         }
