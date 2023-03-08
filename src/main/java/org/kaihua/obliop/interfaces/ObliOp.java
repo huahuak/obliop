@@ -1,6 +1,7 @@
 package org.kaihua.obliop.interfaces;
 
 import java.nio.ByteBuffer;
+import java.util.Optional;
 
 import org.astonbitecode.j4rs.api.Instance;
 import org.astonbitecode.j4rs.api.java2rust.Java2RustUtils;
@@ -45,9 +46,9 @@ public class ObliOp {
   }
 
   // ------------------ obli data get ------------------ //
-  public static ByteBuffer ObliDataGet(ObliData obliData) {
+  public static Optional<ByteBuffer> ObliDataGet(ObliData obliData) {
     JniDataReceiver jniDataReciver = new JniDataReceiver();
     ObliJni.doObliDataGet(obliData.id, jniDataReciver);
-    return jniDataReciver.get().get();
+    return jniDataReciver.get();
   }
 }
