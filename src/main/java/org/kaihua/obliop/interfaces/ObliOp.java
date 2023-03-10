@@ -25,7 +25,7 @@ public class ObliOp {
 
   public static RetObj ObliOpCtxExec(Context ctx) {
     return Java2RustUtils.getObjectCasted(
-        doObliOpCtxExec(Java2RustUtils.createInstance(ctx)));
+        doObliOpCtxExec(Java2RustUtils.createInstance(ctx.removeDummyRoot())));
   }
 
   // ------------------ obli op close ------------------ //
