@@ -25,7 +25,7 @@ public class Operation {
     expr.typ = ExprType.SORT;
     expr.input = in;
     expr.output = out;
-    expr.info.put(ExtraExprInfo.SortOrder, );
+    // expr.info.put(ExtraExprInfo.SortOrder);
     ctx.addExpr(expr);
     return out;
   }
