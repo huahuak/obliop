@@ -9,6 +9,8 @@ import org.kaihua.obliop.operator.context.Expression;
 import org.kaihua.obliop.operator.context.ExtraExprInfo;
 import org.kaihua.obliop.operator.context.SortOrderInfo;
 
+import com.google.gson.Gson;
+
 public class Operation {
   public static ObliData hash(Context ctx, ObliData in) {
     return process(ctx, in, ExprType.HASH);
@@ -25,7 +27,8 @@ public class Operation {
     expr.typ = ExprType.SORT;
     expr.input = in;
     expr.output = out;
-    // expr.info.put(ExtraExprInfo.SortOrder);
+    Gson gson = new Gson();
+    expr.info.put(ExtraExprInfo.SortOrder, gson.toJson(orders));
     ctx.addExpr(expr);
     return out;
   }
