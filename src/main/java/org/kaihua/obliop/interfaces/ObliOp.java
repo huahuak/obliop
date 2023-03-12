@@ -31,7 +31,7 @@ public class ObliOp {
   // ------------------ obli op close ------------------ //
   private static native Instance doObliOpClose(Instance<Integer> opId);
 
-  public static RetObj ObliOpClsoe(int opId) {
+  public static RetObj ObliOpClose(int opId) {
     return Java2RustUtils.getObjectCasted(
         doObliOpClose(Java2RustUtils.createInstance(opId)));
   }
@@ -46,8 +46,8 @@ public class ObliOp {
 
   // ------------------ obli data get ------------------ //
   public static Optional<ByteBuffer> ObliDataGet(ObliData obliData) {
-    JniDataReceiver jniDataReciver = new JniDataReceiver();
-    ObliJni.doObliDataGet(obliData.id, jniDataReciver);
-    return jniDataReciver.get();
+    JniDataReceiver jniDataReceiver = new JniDataReceiver();
+    ObliJni.doObliDataGet(obliData.id, jniDataReceiver);
+    return jniDataReceiver.get();
   }
 }
