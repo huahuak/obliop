@@ -18,12 +18,10 @@ public class FbsVector {
   private ByteBuffer directBuffer;
   private FlatBufferBuilder builder;
   private int offset;
-  private List<Integer> fieldOffset;
   private List<Integer> rowOffset;
 
   FbsVector(int cap) {
     offset = 0;
-    fieldOffset = new ArrayList<>(0);
     rowOffset = new ArrayList<>(0);
     directBuffer = ByteBuffer.allocateDirect(cap);
     builder = new FlatBufferBuilder(directBuffer);
@@ -66,17 +64,27 @@ public class FbsVector {
   }
 
   public void append(List<Cell> record) {
+    List<Integer> fieldOffset = new ArrayList<>(0);
     record.forEach(r -> {
-      if (r.clz.equals("StringType")) {
-        offset = builder.createString((String) r.value);
-        offset = StringValue.createStringValue(builder, offset);
-        offset = Field.createField(builder, FieldUnion.StringValue, offset, r.isNull());
-        fieldOffset.add(offset);
-      }
-      if (r.clz.equals("IntegerType")) {
-        offset = IntValue.createIntValue(builder, (Integer) r.value);
-        offset = Field.createField(builder, FieldUnion.IntValue, offset, r.isNull());
-        fieldOffset.add(offset);
+      switch (r.clz) {
+        case "StringType":
+          offset = builder.createString((String) r.value);
+          offset = StringValue.createStringValue(builder, offset);
+          offset = Field.createField(builder, FieldUnion.StringValue, offset, r.isNull());
+          fieldOffset.add(offset);
+          break;
+        case "IntegerType":
+          offset = IntValue.createIntValue(builder, (Integer) r.value);
+          offset = Field.createField(builder, FieldUnion.IntValue, offset, r.isNull());
+          fieldOffset.add(offset);
+          break;
+        case "LongType":
+          offset = IntValue.createIntValue(builder, ((Long) r.value).intValue());
+          offset = Field.createField(builder, FieldUnion.IntValue, offset, r.isNull());
+          fieldOffset.add(offset);
+          break;
+        default:
+          throw new RuntimeException("[FbsVector.java::append()] the type " + r.clz + " is unsupported!");
       }
     });
     int[] arr = new int[fieldOffset.size()];
@@ -97,7 +105,7 @@ public class FbsVector {
     offset = RowTable.createRowTable(builder, offset);
     builder.finish(offset);
     ByteBuffer bytbuf = builder.dataBuffer();
-    builder.clear();
+//    builder.clear();
     return bytbuf;
   }
 
