@@ -5,7 +5,6 @@ import org.kaihua.obliop.collection.fbs.*;
 import org.kaihua.obliop.data.ObliData;
 import sun.nio.ch.DirectBuffer;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
