@@ -17,7 +17,7 @@ import org.kaihua.obliop.operator.context.Context;
 public class ObliOp {
 
   static {
-    System.load("/root/lkh/java/libobliclient.so");
+    System.load("/Users/huahua/IdeaProjects/obli/obliop/obliclient/target/debug/libobliclient.dylib");
   }
 
   // ------------------ obli op exec ------------------ //
