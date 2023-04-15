@@ -1,13 +1,22 @@
 package org.kaihua.obliop.collection;
 
 import com.google.flatbuffers.FlatBufferBuilder;
-import org.kaihua.obliop.collection.fbs.*;
 import org.kaihua.obliop.data.ObliData;
-import sun.nio.ch.DirectBuffer;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.kaihua.obliop.collection.fbs.DoubleValue;
+import org.kaihua.obliop.collection.fbs.Field;
+import org.kaihua.obliop.collection.fbs.FieldUnion;
+import org.kaihua.obliop.collection.fbs.IntValue;
+import org.kaihua.obliop.collection.fbs.Row;
+import org.kaihua.obliop.collection.fbs.RowTable;
+import org.kaihua.obliop.collection.fbs.StringValue;
+
+
+import sun.nio.ch.DirectBuffer;
 
 /**
  * @author kahua.li
@@ -105,7 +114,7 @@ public class FbsVector {
     offset = RowTable.createRowTable(builder, offset);
     builder.finish(offset);
     ByteBuffer bytbuf = builder.dataBuffer();
-//    builder.clear();
+    // builder.clear();
     return bytbuf;
   }
 
