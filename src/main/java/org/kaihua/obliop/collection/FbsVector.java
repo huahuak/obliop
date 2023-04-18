@@ -96,7 +96,7 @@ public class FbsVector {
     rowOffset.add(offset);
   }
 
-  public ByteBuffer finishAndClear() {
+  public ByteBuffer finish() {
     int[] arr = new int[rowOffset.size()];
     for (int i = 0; i < arr.length; i++) {
       arr[i] = rowOffset.get(i);
@@ -105,7 +105,6 @@ public class FbsVector {
     offset = RowTable.createRowTable(builder, offset);
     builder.finish(offset);
     ByteBuffer bytbuf = builder.dataBuffer();
-//    builder.clear();
     return bytbuf;
   }
 
