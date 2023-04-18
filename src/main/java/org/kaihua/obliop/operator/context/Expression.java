@@ -12,7 +12,6 @@ public class Expression {
   // @todo uuid can't be random;
   public String id = UUID.randomUUID().toString();
   public ExprType typ;
-  public ObliData input;
   public ObliData output;
   public List<Expression> children = new ArrayList<>();
   public HashMap<ExtraExprInfo, String> info = new HashMap<>();
