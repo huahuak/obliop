@@ -109,6 +109,10 @@ public class FbsVector {
     return bytbuf;
   }
 
+  public void clearBuilder() {
+    builder.clear();
+  }
+
   public static ObliData toObliData(ByteBuffer buf) {
     return new ObliData(
         ((DirectBuffer) buf).address() + buf.position(),
