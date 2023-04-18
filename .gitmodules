@@ -1,0 +1,3 @@
+[submodule "obliclient"]
+	path = obliclient
+	url = https://github.com/huahuak/obliclient
