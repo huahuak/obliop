@@ -1,16 +1,15 @@
 package org.kaihua.obliop.operator.context;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class Context {
   // public for serialization
+  public String id = UUID.randomUUID().toString();
   public List<Expression> expressions = new ArrayList<>();
 
-  public void addExpr(Expression expr) {
+  public Context addExpr(Expression expr) {
     this.expressions.add(expr);
+    return this;
   }
 
   private static Optional<Expression> find(
