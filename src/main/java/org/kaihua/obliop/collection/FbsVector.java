@@ -1,6 +1,8 @@
 package org.kaihua.obliop.collection;
 
 import com.google.flatbuffers.FlatBufferBuilder;
+
+import org.kaihua.obliop.config;
 import org.kaihua.obliop.collection.fbs.*;
 import org.kaihua.obliop.data.ObliData;
 import sun.nio.ch.DirectBuffer;
@@ -15,15 +17,17 @@ import java.util.List;
  * @date 2023/01/12
  **/
 public class FbsVector {
+  private static int blockSize = config.blockSize;
+
   private ByteBuffer directBuffer;
   private FlatBufferBuilder builder;
   private int offset;
   private List<Integer> rowOffset;
 
-  FbsVector(int cap) {
+  FbsVector() {
     offset = 0;
     rowOffset = new ArrayList<>(0);
-    directBuffer = ByteBuffer.allocateDirect(cap);
+    directBuffer = ByteBuffer.allocateDirect(blockSize);
     builder = new FlatBufferBuilder(directBuffer);
   }
 
@@ -44,7 +48,7 @@ public class FbsVector {
   }
 
   public static FbsVector createVec() {
-    return new FbsVector(1024);
+    return new FbsVector();
   }
 
   public static class Cell {
