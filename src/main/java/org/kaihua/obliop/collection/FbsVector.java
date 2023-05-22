@@ -2,7 +2,7 @@ package org.kaihua.obliop.collection;
 
 import com.google.flatbuffers.FlatBufferBuilder;
 
-import org.kaihua.obliop.config;
+import org.kaihua.obliop.Config;
 import org.kaihua.obliop.collection.fbs.*;
 import org.kaihua.obliop.data.ObliData;
 import sun.nio.ch.DirectBuffer;
@@ -17,7 +17,7 @@ import java.util.List;
  * @date 2023/01/12
  **/
 public class FbsVector {
-  private static int blockSize = config.blockSize;
+  private static int blockSize = Config.blockSize;
 
   private ByteBuffer directBuffer;
   private FlatBufferBuilder builder;
