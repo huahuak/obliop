@@ -10,6 +10,7 @@ import org.kaihua.obliop.data.ObliData;
 import org.kaihua.obliop.interfaces.ObliOp;
 import org.kaihua.obliop.operator.Operation;
 import org.kaihua.obliop.operator.context.Context;
+import org.kaihua.obliop.operator.context.Expression;
 
 import io.netty.buffer.ByteBuf;
 import sun.nio.ch.DirectBuffer;
@@ -54,10 +55,11 @@ public class Main {
         ((DirectBuffer) buf).address() + buf.position(),
         buf.capacity() - buf.position());
     ObliOp.ObliDataSend(testData);
+    Expression expr = Operation.hash(Operation.newDataNode(testData));
     Context ctx = Context.empty();
-    ObliData result = Operation.hash(ctx, testData);
+    ctx.addExpr(expr);
     ObliOp.ObliOpCtxExec(ctx);
-    ByteBuffer bytBuf = ObliOp.ObliDataGet(result).get();
+    ByteBuffer bytBuf = ObliOp.ObliDataGet(expr.output).get();
     // byte[] byt = new byte[1024];
     // bytBuf.get(byt);
     // printByte(byt);

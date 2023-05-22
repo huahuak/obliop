@@ -4,7 +4,6 @@
     <artifactId>spark-parent_2.12</artifactId>
     <groupId>org.apache.spark</groupId>
     <version>3.3.1</version>
-    <relativePath>../pom.xml/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.kaihua.obliop</groupId>
